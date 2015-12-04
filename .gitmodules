@@ -1,0 +1,3 @@
+[submodule "examples/BabyconMidiUSB"]
+	path = examples/BabyconMidiUSB
+	url = git@github.com:ATtinyTeenageRiot/BabyconMidiUSB.git
