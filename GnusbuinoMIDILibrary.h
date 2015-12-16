@@ -50,6 +50,7 @@
 #   define MCUCSR   MCUSR
 #endif
 
+#define delay(x) _delay_usb(x)
 
 // ==============================================================================
 // MIDI STUFF
