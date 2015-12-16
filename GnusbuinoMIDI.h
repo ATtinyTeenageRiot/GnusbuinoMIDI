@@ -22,6 +22,7 @@
 #ifndef MIDICLASS_h
 #define MIDICLASS_h
 
+
 #include <inttypes.h>
 #include <stdio.h> // for size_t
 
