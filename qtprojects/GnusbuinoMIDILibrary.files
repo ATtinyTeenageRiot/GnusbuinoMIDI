@@ -1,0 +1,11 @@
+../GnusbuinoMIDI.h
+../GnusbuinoMIDIdescriptor.h
+../GnusbuinoMIDILibrary.cpp
+../GnusbuinoMIDILibrary.h
+../GnusbuinoMIDInotes.h
+../oddebug.c
+../oddebug.h
+../usbconfig.h
+../usbdrv.cpp
+../usbdrv.h
+../usbportability.h
