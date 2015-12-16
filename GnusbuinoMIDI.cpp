@@ -197,7 +197,7 @@ size_t MIDIClass::println(unsigned long c, int base)
     return println();
 }
 
-void MIDIClass::initMidi()
+void MIDIClass::init()
 {
     MCUCSR = (1 << PORF);			// set power on reset flag just to be sure
 

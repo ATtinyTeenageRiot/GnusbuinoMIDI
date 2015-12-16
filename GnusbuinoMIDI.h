@@ -134,7 +134,7 @@ public:
     size_t println(unsigned long, int = DEC);
     size_t println(double, int = 2);
 
-    void initMidi();
+    void init();
     void sendMIDI(void);
     void flush(void);
     void delay(unsigned long ms);
