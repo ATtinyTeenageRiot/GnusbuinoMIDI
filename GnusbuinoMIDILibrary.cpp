@@ -188,7 +188,7 @@ void usbMidiSend(void) {
 // ------------------------------------------------------------------------------
 // --------------------- Init AD Converter
 // ------------------------------------------------------------------------------
-void adInit(void){
+void usbMidiADCinit(void){
 
 
 
@@ -215,7 +215,7 @@ void adInit(void){
 void usbMidiInit()
 {
 	MCUCSR = (1 << PORF);			// set power on reset flag just to be sure
-	adInit();
+	usbMidiADCinit();
 
 	wdt_enable(WDTO_1S);	// enable watchdog timer
 	
