@@ -145,7 +145,7 @@ void usbFunctionWriteOut(unsigned char * data, unsigned char len)
 	}
 
 
-	return;
+	// return;
 
 	// statusLedBlink(StatusLed_Yellow);
 
