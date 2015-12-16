@@ -406,7 +406,7 @@ void MIDIClass::flush(void)
 //    while( _sysex_len | _midiSendEnqueueIdx != _midiSendDequeueIdx) {
     //doPeriodical();
     usbPoll();
-    this->sendMIDI();
+    MIDI.sendMIDI();
     wdt_reset();
 
     //    }
@@ -425,7 +425,7 @@ void MIDIClass::delay(unsigned long ms)
         {
             if (((uint16_t)micros() - start) >= 1000)
                 {
-                    this->flush();
+                    MIDI.flush();
                     ms--;
                     start += 1000;
                 }
@@ -443,7 +443,7 @@ void MIDIClass::restartToBootloader()
     cli();							// turn off interrupts
     wdt_disable();					// disable watchdog timer
     usbDeviceDisconnect(); 			// disconnect gnusb from USB bus
-    this->delay(100);
+    MIDI.delay(100);
 
     USB_INTR_ENABLE = 0;
     USB_INTR_CFG = 0;       /* also reset config bits */
