@@ -23,7 +23,7 @@
 
 MIDIClass MIDI;
 
-uchar midiMsg[8];
+//uchar midiMsg[8];
 
 // ------------------------------------------------------------------------------
 // - Start Bootloader
