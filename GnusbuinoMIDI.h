@@ -1,7 +1,7 @@
 /*
   GnusbuinoMIDI.h - MIDI over USB library for the Gnusbuino
   http://gnusb.sourceforge.net
-  
+
   Copyright (c) 2012 Michael Egger.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -22,11 +22,47 @@
 #ifndef MIDICLASS_h
 #define MIDICLASS_h
 
+#include <Arduino.h>
 
 #include <inttypes.h>
 #include <stdio.h> // for size_t
+#include <avr/wdt.h>
+#include <util/delay.h>
+#include <usbdrv.h>
 
-#include "GnusbuinoMIDInotes.h"
+#include <GnusbuinoMIDIdescriptor.h>
+#include <GnusbuinoMIDInotes.h>
+
+
+// ==============================================================================
+// Constants
+// ------------------------------------------------------------------------------
+
+// Usb request to start Bootloader for Software updates
+#define STATUS_LED_PORT PORTD
+#define GNUSBCORE_CMD_SET_SMOOTHING			0xf0
+#define GNUSBCORE_CMD_START_BOOTLOADER 		0xf8
+
+// this is from original midi_gnusb.h
+#define ADC_MUX_MASK			0x0F
+#define ADC_PRESCALE_DIV64		0x06	///< 0x06 -> CPU clk/64
+#define ADC_PRESCALE_MASK		0x07
+
+#ifndef MCUCSR          /* compatibility between ATMega16 and ATMega644 */
+#define MCUCSR   MCUSR
+#endif
+
+// ==============================================================================
+// MIDI STUFF
+// ------------------------------------------------------------------------------
+
+typedef struct _midi_msg
+{
+    uchar cn : 4;
+    uchar cin : 4;
+    uchar byte[3];
+} midi_msg;
+
 
 /******************************************************************************
  * Definitions
@@ -51,15 +87,16 @@
 #define MIDI_STOP				0xFC
 
 #if defined(__AVR_ATtiny85__)
-	#define MIDI_MAX_BUFFER		10
+#define MIDI_MAX_BUFFER		10
 #else
-	#define MIDI_MAX_BUFFER		64
+#define MIDI_MAX_BUFFER		64
 #endif
 
-typedef struct {
-	unsigned char command;
-	unsigned char key;
-	unsigned char value;
+typedef struct
+{
+    unsigned char command;
+    unsigned char key;
+    unsigned char value;
 } MIDIMessage;
 
 #define DEC 10
@@ -72,12 +109,13 @@ typedef struct {
  * MIDI Class
  ******************************************************************************/
 
-class MIDIClass {
+class MIDIClass
+{
 
 public:
-	void write(uint8_t,uint8_t,uint8_t);
-	uint8_t read(MIDIMessage*);
-	size_t print(const char *);
+    void write(uint8_t,uint8_t,uint8_t);
+    uint8_t read(MIDIMessage*);
+    size_t print(const char *);
     size_t print(char, int = DEC);
     size_t print(unsigned char, int = DEC);
     size_t print(int, int = DEC);
@@ -85,41 +123,48 @@ public:
     size_t print(long, int = DEC);
     size_t print(unsigned long, int = DEC);
     size_t print(double, int = 2);
-	
-	size_t println(void);
-	size_t println(char, int = DEC);
-	size_t println(const char *);
+
+    size_t println(void);
+    size_t println(char, int = DEC);
+    size_t println(const char *);
     size_t println(unsigned char, int = DEC);
     size_t println(int, int = DEC);
     size_t println(unsigned int, int = DEC);
     size_t println(long, int = DEC);
     size_t println(unsigned long, int = DEC);
     size_t println(double, int = 2);
-	
-	
-	void sendMIDI(void);
-	void flush(void);
-	
-	void receiveMIDI(uint8_t,uint8_t,uint8_t);
-	
-	private:
-		unsigned char _midiOutData[4];
 
-		unsigned char _midiSendEnqueueIdx;
-		unsigned char _midiSendDequeueIdx;
-		unsigned char _midiSendQueue [MIDI_MAX_BUFFER * 3];
-	
-		unsigned char _midiRecvEnqueueIdx;
-		unsigned char _midiRecvDequeueIdx;
-		unsigned char _midiRecvQueue [MIDI_MAX_BUFFER * 3];
+    void initMidi();
+    void sendMIDI(void);
+    void flush(void);
+    void delay(unsigned long ms);
+    void restartToBootloader(void);
 
-		char * _sysex_buffer;
-		unsigned char _sysex_idx;
-		unsigned char _sysex_len;
+    void receiveMIDI(uint8_t,uint8_t,uint8_t);
+
+private:
+    unsigned char _midiOutData[4];
+
+    unsigned char _midiSendEnqueueIdx;
+    unsigned char _midiSendDequeueIdx;
+    unsigned char _midiSendQueue [MIDI_MAX_BUFFER * 3];
+
+    unsigned char _midiRecvEnqueueIdx;
+    unsigned char _midiRecvDequeueIdx;
+    unsigned char _midiRecvQueue [MIDI_MAX_BUFFER * 3];
+
+    char * _sysex_buffer;
+    unsigned char _sysex_idx;
+    unsigned char _sysex_len;
 
 };
 
-	extern MIDIClass MIDI;
+
+extern void handleNoteOn(unsigned char note);
+extern void handleNoteOff(unsigned char note);
+void sendControlChange(unsigned char controller,unsigned char value);
+void sendNote(unsigned char key, unsigned char velocity);
+
+extern MIDIClass MIDI;
 
 #endif
-
