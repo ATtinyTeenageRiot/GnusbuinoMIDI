@@ -79,7 +79,7 @@ unsigned char usbFunctionSetup(unsigned char data[8]);
 unsigned char usbFunctionRead(unsigned char * data, unsigned char len);
 unsigned char usbFunctionWrite(unsigned char * data, unsigned char len);
 void usbFunctionWriteOut(unsigned char * data, unsigned char len);
-void doPeriodical(void);
+void usbMidiSend(void);
 void adInit(void);
 void _delay_usb(unsigned long ms);
 

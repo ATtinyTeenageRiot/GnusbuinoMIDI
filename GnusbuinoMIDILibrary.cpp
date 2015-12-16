@@ -162,12 +162,12 @@ void usbFunctionWriteOut(unsigned char * data, unsigned char len)
 
 
 // ------------------------------------------------------------------------------
-// - doPeriodical
+// - usbMidiSend
 // ------------------------------------------------------------------------------
 // stuff that has do be done often in the loop and not forgotten while delaying
 
 
-void doPeriodical(void) {
+void usbMidiSend(void) {
 
 		// if (blinkstop) {
 		// 	if (millis() >= blinkstop) {
@@ -251,7 +251,7 @@ void usbMidiInit()
 // ------------------------------------------------------------------------------
 // - delay usb
 // ------------------------------------------------------------------------------
-// taken from wiring
+// taken from wiring.cpp (midibabygnusbuino)
 
 void _delay_usb(unsigned long ms)
 {
@@ -259,7 +259,7 @@ void _delay_usb(unsigned long ms)
 
 	while (ms > 0) {	
 		if (((uint16_t)micros() - start) >= 1000) {
-			doPeriodical();
+			usbMidiSend();
 			ms--;
 			start += 1000;
 		}
