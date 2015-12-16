@@ -22,6 +22,7 @@ unsigned char sentValue = 255;         // we only want to send data when there's
                              // so we have to keep track of the last value that was sent to the host
 
 void setup() {               // nothing to do in setup, pins are inputs by default
+  MIDI.init();
 }
 
 
@@ -36,7 +37,9 @@ void loop() {
         sentValue = sensorValue;                          // store last sent value
   }
   
-    delay(10);              // give some time for sending, otherwhise the MIDI queue could fill up
+    MIDI.delay(10);              // give some time for sending, otherwhise the MIDI queue could fill up
+
+    MIDI.flush();
 }
 
 

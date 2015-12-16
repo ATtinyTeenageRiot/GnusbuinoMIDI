@@ -15,6 +15,7 @@
 MIDIMessage message;        // Variable to hold most recent midi message
 
 void setup() {               // nothing to do in setup, pins are inputs by default
+	MIDI.init();
 }
 
 
@@ -23,6 +24,8 @@ void loop() {
     if (MIDI.read(&message)) {                                    // need to put the ampersand "&" before "message"
         MIDI.write(message.command,message.key,message.value);
     }
+
+    MIDI.flush();
     
  }
  

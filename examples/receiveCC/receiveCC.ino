@@ -19,6 +19,7 @@ MIDIMessage message;         // variable to store the last received MIDI message
 
 void setup() {               
   pinMode(3,OUTPUT);         // Pin 3 (and 4) on the Gnusbuino has a PWM ("analog") output
+  MIDI.init();
 }
 
 

@@ -15,7 +15,9 @@
 
 unsigned long lastTime;            // variable to store the last time we sent a chord
 
-void setup() {}
+void setup() {
+  MIDI.init();
+}
 
 
 // the loop routine runs over and over again forever:
@@ -30,6 +32,8 @@ void loop() {
          MIDI.write(MIDI_NOTEON,67,127);
          lastTime = millis();      
   }   
+
+  MIDI.flush();
 }
 
 

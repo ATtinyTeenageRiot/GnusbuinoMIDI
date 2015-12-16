@@ -15,8 +15,9 @@
 
 MIDIMessage message;          
 
-void setup() {               
+void setup() {  
   pinMode(3,OUTPUT);
+  MIDI.init();             
 }
 
 
@@ -34,6 +35,7 @@ void loop() {
              
         }
     }
+
  }
  
  
