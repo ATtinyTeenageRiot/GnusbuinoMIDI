@@ -30,7 +30,7 @@ uchar midiMsg[8];
 // ------------------------------------------------------------------------------
 // dummy function doing the jump to bootloader section (Adress 1C00 on Atmega644)
 
-void startBootloader(void) {
+void usbMidiRestartToBootloader(void) {
 
 		cli();							// turn off interrupts
 		wdt_disable();					// disable watchdog timer
@@ -84,7 +84,7 @@ unsigned char usbFunctionSetup(unsigned char data[8])
 // 								----------------------------   Start Bootloader for reprogramming the gnusb    		
 		case GNUSBCORE_CMD_START_BOOTLOADER:
 
-			startBootloader();
+			usbMidiRestartToBootloader();
 			break;
 				
 		default:
@@ -140,7 +140,7 @@ void usbFunctionWriteOut(unsigned char * data, unsigned char len)
 			data[0] == 0x07 && data[1] == 0xF0 && data[2] == 0x08 && data[3] == 0xF7
 			)
 		{
-			startBootloader();
+			usbMidiRestartToBootloader();
 		}
 	}
 
