@@ -443,7 +443,7 @@ void MIDIClass::restartToBootloader()
     cli();							// turn off interrupts
     wdt_disable();					// disable watchdog timer
     usbDeviceDisconnect(); 			// disconnect gnusb from USB bus
-    MIDI.delay(100);
+    _delay_ms(100);
 
     USB_INTR_ENABLE = 0;
     USB_INTR_CFG = 0;       /* also reset config bits */
