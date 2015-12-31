@@ -13,7 +13,9 @@
  */
 
 // don't include (mandatory) dummy AudioControl descriptor
+#ifndef GNUSBUINO_WITH_AUDIO_CONTROL
 #define WITHOUT_AUDIO_CONTROL
+#endif
 
 // This descriptor is based on http://www.usb.org/developers/devclass_docs/midi10.pdf
 // constants from midi10.pdf
@@ -229,7 +231,11 @@ static PROGMEM const char configDescrMIDI[] = {	/* USB configuration descriptor 
     9,			/* bLenght */
     USBDESCR_ENDPOINT,	/* bDescriptorType = endpoint */
     1 | M10_DIR_OUT,	/* bEndpointAddress OUT endpoint number 1 */
-    M10_INTERRUPT,		/* bmAttributes: 2:Bulk, 3:Interrupt endpoint */
+    #ifdef GNUSBUINOMIDI_ENABLE_ANDROID
+    M10_BULK,		/* bmAttributes: 2:Bulk, 3:Interrupt endpoint */
+        #else
+    M10_INTERRUPT,
+    #endif
     8, 0,			/* wMaxPacketSize */
     2,			/* bIntervall in ms */
     M10_UNUSED,		/* bRefresh */
@@ -248,7 +254,11 @@ static PROGMEM const char configDescrMIDI[] = {	/* USB configuration descriptor 
     9,			/* bLenght */
     USBDESCR_ENDPOINT,	/* bDescriptorType = endpoint */
     M10_DIR_IN | 1,		/* bEndpointAddress IN endpoint number 1 */
-    M10_INTERRUPT,		/* bmAttributes: 2: Bulk, 3: Interrupt endpoint */
+    #ifdef GNUSBUINOMIDI_ENABLE_ANDROID
+    M10_BULK,		/* bmAttributes: 2:Bulk, 3:Interrupt endpoint */
+        #else
+    M10_INTERRUPT,
+    #endif
     8, 0,			/* wMaxPacketSize */
     2,			/* bIntervall in ms */
     M10_UNUSED,		/* bRefresh */
