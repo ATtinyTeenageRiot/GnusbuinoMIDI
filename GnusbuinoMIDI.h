@@ -25,7 +25,7 @@
 #include <Arduino.h>
 
 #ifdef ARDUINO_BABYGNUSBUINO2
-#include <GnusbuinoMidiConfig.h>        // custom config for Babygnusbuino2 user
+#include <GnusbuinoMIDIConfig.h>        // custom config for Babygnusbuino2 user
 #endif
 
 #include <inttypes.h>
