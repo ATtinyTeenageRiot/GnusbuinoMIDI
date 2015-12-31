@@ -5,17 +5,17 @@
 // Misc Options.. 
 //
 
-#define GNUSBUINOMIDI_ENABLE_ANDROID			//hack to make device compatible with android device but broke on windows
-#define GNUSBUINOMIDI_WITH_AUDIO_CONTROL		//enable virtual dummy audio device
+#define GNUSBUINOMIDI_ENABLE_ANDROID		//hack to make device compatible with android device but broke on windows
+#define GNUSBUINOMIDI_WITH_AUDIO_CONTROL	//enable virtual dummy audio device
 
 //
 // Custom USB D+ and D- pin
 //
 
 #define GNUSBUINOMIDI_ENABLE_CUSTOM_USB_CFG
-#define GNUSBUINOMIDI_USB_IOPORTNAME B   //when custom cfg disabled default is B
-#define GNUSBUINOMIDI_USB_DMINUS 5		 //when custom cfg disabled default is 5
-#define GNUSBUINOMIDI_USB_DPLUS 3		 //when custom cfg disabled default is 3
+#define GNUSBUINOMIDI_USB_IOPORTNAME B	//when custom cfg disabled default is B
+#define GNUSBUINOMIDI_USB_DMINUS 5	//when custom cfg disabled default is 5
+#define GNUSBUINOMIDI_USB_DPLUS 3	//when custom cfg disabled default is 3
 
 /*
 
