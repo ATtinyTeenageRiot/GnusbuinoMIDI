@@ -8,7 +8,7 @@
   This example code is in the public domain.
 
 
-  GnusbuinoMIDIConfig.h will included automaticly when using Babygnusbuino
+  GnusbuinoMIDIConfig.h will included automatically when using Babygnusbuino
 
   by detecting ARDUINO_BABYGNUSBUINO2 define variable
 
