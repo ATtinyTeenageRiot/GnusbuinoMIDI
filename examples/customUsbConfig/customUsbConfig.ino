@@ -10,7 +10,7 @@
 --------------------------------------------------------------------------------------------- */
 
 
-#include <GnusbuinoMidiConfig.h>  //Optional config file
+#include "GnusbuinoMidiConfig.h"  //Optional config file
 #include <GnusbuinoMIDI.h>        // you MUST include the Gnusbuino MIDI library
 
 unsigned long lastTime;            // variable to store the last time we sent a chord
