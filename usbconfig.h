@@ -25,27 +25,27 @@ section at the end of this file).
 */
 
 #ifdef GNUSBUINOMIDI_ENABLE_CUSTOM_USB_CFG
-    #ifdef GNUSBUINOMIDI_USB_IOPORTNAME
-    #define USB_CFG_IOPORTNAME      GNUSBUINOMIDI_USB_IOPORTNAME
-    #else
-    #define USB_CFG_IOPORTNAME      B
-    #endif
+#ifdef GNUSBUINOMIDI_USB_IOPORTNAME
+#define USB_CFG_IOPORTNAME      GNUSBUINOMIDI_USB_IOPORTNAME
+#else
+#define USB_CFG_IOPORTNAME      B
+#endif
 
-    #define USB_CFG_DMINUS_BIT      GNUSBUINOMIDI_USB_DMINUS
-    #define USB_CFG_DPLUS_BIT       GNUSBUINOMIDI_USB_DPLUS
+#define USB_CFG_DMINUS_BIT      GNUSBUINOMIDI_USB_DMINUS
+#define USB_CFG_DPLUS_BIT       GNUSBUINOMIDI_USB_DPLUS
 
-    #define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
-    #define USB_CFG_CHECK_CRC       0
+#define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
+#define USB_CFG_CHECK_CRC       0
 #else
 /* ---------------------------- Hardware Config ---------------------------- */
 #if defined(__AVR_ATtiny85__)
-	#define USB_CFG_IOPORTNAME      B
-	#define USB_CFG_DMINUS_BIT      5
-	#define USB_CFG_DPLUS_BIT       3
-	#define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
-	#define USB_CFG_CHECK_CRC       0
-	//#define USB_CFG_PULLUP_IOPORTNAME   B
-	//#define USB_CFG_PULLUP_BIT          0
+#define USB_CFG_IOPORTNAME      B
+#define USB_CFG_DMINUS_BIT      5
+#define USB_CFG_DPLUS_BIT       3
+#define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
+#define USB_CFG_CHECK_CRC       0
+//#define USB_CFG_PULLUP_IOPORTNAME   B
+//#define USB_CFG_PULLUP_BIT          0
 #else
 #define USB_CFG_IOPORTNAME      D
 /* This is the port where the USB bus is connected. When you configure it to
