@@ -24,7 +24,19 @@ section at the end of this file).
 + Then edit it accordingly.
 */
 
+#ifdef GNUSBUINOMIDI_ENABLE_CUSTOM_USB_CFG
+    #ifdef GNUSBUINOMIDI_USB_IOPORTNAME
+    #define USB_CFG_IOPORTNAME      GNUSBUINOMIDI_USB_IOPORTNAME
+    #else
+    #define USB_CFG_IOPORTNAME      B
+    #endif
 
+    #define USB_CFG_DMINUS_BIT      GNUSBUINOMIDI_USB_DMINUS
+    #define USB_CFG_DPLUS_BIT       GNUSBUINOMIDI_USB_DPLUS
+
+    #define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
+    #define USB_CFG_CHECK_CRC       0
+#else
 /* ---------------------------- Hardware Config ---------------------------- */
 #if defined(__AVR_ATtiny85__)
 	#define USB_CFG_IOPORTNAME      B
@@ -81,6 +93,8 @@ section at the end of this file).
  * above) where the 1.5k pullup resistor is connected. See description
  * above for details.
  */
+#endif
+
 #endif
 /* --------------------------- Functional Range ---------------------------- */
 
@@ -378,6 +392,20 @@ section at the end of this file).
  */
  
  // setup interrupt for Pin Change for D+
+
+#ifdef GNUSBUINOMIDI_ENABLE_CUSTOM_DPLUS_INTERRUPT
+
+#define USB_INTR_CFG            GNUSBUINOMIDI_USB_INTR_CFG
+#define USB_INTR_CFG_SET        GNUSBUINOMIDI_USB_INTR_CFG_SET
+#define USB_INTR_CFG_CLR        GNUSBUINOMIDI_USB_INTR_CFG_CLR
+#define USB_INTR_ENABLE         GNUSBUINOMIDI_USB_INTR_ENABLE
+#define USB_INTR_ENABLE_BIT     GNUSBUINOMIDI_USB_INTR_ENABLE_BIT
+#define USB_INTR_PENDING        GNUSBUINOMIDI_USB_INTR_PENDING
+#define USB_INTR_PENDING_BIT    GNUSBUINOMIDI_USB_INTR_PENDING_BIT
+#define USB_INTR_VECTOR         GNUSBUINOMIDI_USB_INTR_VECTOR
+
+#else
+
 #define USB_INTR_CFG            PCMSK
 #define USB_INTR_CFG_SET        (1 << USB_CFG_DPLUS_BIT)
 #define USB_INTR_CFG_CLR        0
@@ -386,6 +414,9 @@ section at the end of this file).
 #define USB_INTR_PENDING        GIFR
 #define USB_INTR_PENDING_BIT    PCIF
 #define USB_INTR_VECTOR         PCINT0_vect
+
+#endif
+
 
 /* #define USB_INTR_CFG            MCUCR */
 /* #define USB_INTR_CFG_SET        ((1 << ISC00) | (1 << ISC01)) */
