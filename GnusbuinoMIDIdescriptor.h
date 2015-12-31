@@ -13,7 +13,7 @@
  */
 
 // don't include (mandatory) dummy AudioControl descriptor
-#ifndef GNUSBUINO_WITH_AUDIO_CONTROL
+#ifndef GNUSBUINOMIDI_WITH_AUDIO_CONTROL
 #define WITHOUT_AUDIO_CONTROL
 #endif
 
