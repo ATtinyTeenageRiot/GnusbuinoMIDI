@@ -24,9 +24,7 @@
 
 #include <Arduino.h>
 
-#ifdef ARDUINO_BABYGNUSBUINO2
-#include <GnusbuinoMIDIConfig.h>        // custom config for Babygnusbuino2 user
-#endif
+#include <GnusbuinoMIDIConfig.h>        // custom config
 
 #include <inttypes.h>
 #include <stdio.h> // for size_t
