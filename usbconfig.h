@@ -384,19 +384,7 @@ section at the end of this file).
  
  // setup interrupt for Pin Change for D+
 
-#ifdef GNUSBUINOMIDI_ENABLE_CUSTOM_DPLUS_INTERRUPT
-
-#define USB_INTR_CFG            GNUSBUINOMIDI_USB_INTR_CFG
-#define USB_INTR_CFG_SET        GNUSBUINOMIDI_USB_INTR_CFG_SET
-#define USB_INTR_CFG_CLR        GNUSBUINOMIDI_USB_INTR_CFG_CLR
-#define USB_INTR_ENABLE         GNUSBUINOMIDI_USB_INTR_ENABLE
-#define USB_INTR_ENABLE_BIT     GNUSBUINOMIDI_USB_INTR_ENABLE_BIT
-#define USB_INTR_PENDING        GNUSBUINOMIDI_USB_INTR_PENDING
-#define USB_INTR_PENDING_BIT    GNUSBUINOMIDI_USB_INTR_PENDING_BIT
-#define USB_INTR_VECTOR         GNUSBUINOMIDI_USB_INTR_VECTOR
-
-#else
-
+#ifndef GNUSBUINOMIDI_ENABLE_CUSTOM_DPLUS_INTERRUPT
 #define USB_INTR_CFG            PCMSK
 #define USB_INTR_CFG_SET        (1 << USB_CFG_DPLUS_BIT)
 #define USB_INTR_CFG_CLR        0
@@ -405,7 +393,6 @@ section at the end of this file).
 #define USB_INTR_PENDING        GIFR
 #define USB_INTR_PENDING_BIT    PCIF
 #define USB_INTR_VECTOR         PCINT0_vect
-
 #endif
 
 #endif /* __usbconfig_h_included__ */
